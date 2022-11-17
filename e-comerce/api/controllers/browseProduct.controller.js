@@ -85,11 +85,11 @@ exports.getIdGenderPart = async (req, res) => {
     const partName = req.query.bodyPart || null;
     if(genderName) {
         const gender = await Gender.findOne({name: genderName}).lean();
-        result.gender = gender._id;
+        result.gender = gender?._id || null;
     }
     if(partName) {
         const bodyPart = await BodyPart.findOne({name: partName}).lean();
-        result.bodyPart = bodyPart._id;
+        result.bodyPart = bodyPart?._id || null;
     }
 
     res.send(result);
